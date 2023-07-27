@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './global.scss'
 import './index.css'
 import ErrorPage from './error-page'
 import Root, { loader as rootLoader, action as rootAction } from './routes/root'
