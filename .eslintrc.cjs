@@ -8,6 +8,8 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    // 允许 ts 的注释指令
+    '@typescript-eslint/ban-ts-comment': 'off',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
   },
 }
