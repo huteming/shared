@@ -8,5 +8,13 @@ export default defineConfig({
       '@': 'src',
     },
   },
+  // 文档: https://cn.vitejs.dev/config/shared-options.html#css-preprocessoroptions
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import '@/styles/variable.scss';`,
+      },
+    },
+  },
   plugins: [react()],
 })
