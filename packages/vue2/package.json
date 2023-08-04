@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "serve": "webpack serve",
     "build": "webpack"
   },
   "keywords": [],
@@ -11,5 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "helpers": "workspace:^"
+  },
+  "devDependencies": {
+    "vue": "2.6.11",
+    "vue-loader": "15.10.1",
+    "vue-template-compiler": "2.6.11",
+    "webpack-dev-server": "4.11.1"
   }
 }

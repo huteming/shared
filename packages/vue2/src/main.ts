@@ -1,4 +1,9 @@
-import { isNil, isDefined } from 'helpers'
+import Vue from 'vue'
+import App from './App.vue'
 
-console.log(isNil(null))
-console.log(isDefined(null))
+Vue.config.productionTip = false
+
+new Vue({
+  el: '#app',
+  render: (h) => h(App),
+})
