@@ -1,15 +1,15 @@
 {
-  "name": "shared",
+  "name": "vue2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm -r --filter=./packages/* run build"
+    "build": "tsc index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.1.6"
+  "dependencies": {
+    "helpers": "workspace:^"
   }
 }
