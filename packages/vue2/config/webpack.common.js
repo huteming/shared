@@ -1,15 +1,12 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const { resolve } = require('./utils')
 
 module.exports = {
-  mode: 'development',
-  // mode: 'production',
-
-  entry: './src/main.ts',
+  entry: resolve('src/main.ts'),
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve('dist'),
     filename: '[name].js',
   },
 
@@ -17,7 +14,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, './src'),
+      '@': resolve('src'),
     },
   },
 
@@ -26,6 +23,17 @@ module.exports = {
     hot: true,
     port: '8080',
   },
+
+  plugins: [
+    // github: https://github.com/jantimon/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      title: 'webpack 搭建 vue 项目',
+      minify: false,
+    }),
+    // 文档: https://vue-loader.vuejs.org/zh/guide
+    new VueLoaderPlugin(),
+  ],
 
   module: {
     rules: [
@@ -68,15 +76,4 @@ module.exports = {
       },
     ],
   },
-
-  plugins: [
-    // github: https://github.com/jantimon/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      title: 'webpack 搭建 vue 项目',
-      minify: false,
-    }),
-    // 文档: https://vue-loader.vuejs.org/zh/guide
-    new VueLoaderPlugin(),
-  ],
 }
