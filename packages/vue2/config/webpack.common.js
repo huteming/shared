@@ -40,18 +40,8 @@ module.exports = {
       // 它会应用到普通的 `.js` 文件
       // 以及 `.vue` 文件中的 `<script>` 块
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
-      },
-      {
-        test: /\.ts?$/,
-        use: 'ts-loader',
+        test: /\.(ts|js)x?$/,
+        use: ['babel-loader'],
         exclude: /node_modules/,
       },
       {
