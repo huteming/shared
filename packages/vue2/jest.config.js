@@ -2,12 +2,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleFileExtensions: [
-    'js',
-    'ts',
-    // 告诉 Jest 处理 `*.vue` 文件
-    'vue',
-  ],
+  moduleFileExtensions: ['js', 'ts', 'vue'],
   testMatch: ['<rootDir>/tests/**/*.spec.[jt]s?(x)'],
 
   setupFiles: ['<rootDir>/tests/setupTests.js'],

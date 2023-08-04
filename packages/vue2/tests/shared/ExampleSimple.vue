@@ -7,8 +7,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
+
+export default defineComponent({
   name: 'Hello',
 
   data() {
@@ -22,5 +24,5 @@ export default {
       return this.username.trim().length < 7 ? 'Please enter a longer username' : ''
     },
   },
-}
+})
 </script>
