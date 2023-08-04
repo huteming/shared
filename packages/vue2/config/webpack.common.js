@@ -6,6 +6,7 @@ module.exports = {
   entry: resolve('src/main.ts'),
 
   output: {
+    clean: true,
     path: resolve('dist'),
     filename: '[name].js',
   },
