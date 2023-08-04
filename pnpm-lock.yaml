@@ -48,6 +48,9 @@ importers:
       ts-jest:
         specifier: ^29.1.1
         version: 29.1.1(@babel/core@7.22.9)(jest@29.6.2)(typescript@5.1.6)
+      tslib:
+        specifier: ^2.6.1
+        version: 2.6.1
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
@@ -1971,7 +1974,7 @@ packages:
     dev: true
 
   /@vue/composition-api@1.7.1(vue@2.6.11):
-    resolution: {integrity: sha512-xDWoEtxGXhH9Ku3ROYX/rzhcpt4v31hpPU5zF3UeVC/qxA3dChmqU8zvTUYoKh3j7rzpNsoFOwqsWG7XPMlaFA==, tarball: https://artifacts.corp.zoom.us:443/artifactory/api/npm/zoom-npm-virtual/@vue/composition-api/-/composition-api-1.7.1.tgz}
+    resolution: {integrity: sha512-xDWoEtxGXhH9Ku3ROYX/rzhcpt4v31hpPU5zF3UeVC/qxA3dChmqU8zvTUYoKh3j7rzpNsoFOwqsWG7XPMlaFA==}
     peerDependencies:
       vue: '>= 2.5 < 2.7'
     dependencies:
@@ -6047,7 +6050,7 @@ packages:
     dev: true
 
   /tslib@2.6.1:
-    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
+    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==, tarball: https://artifacts.corp.zoom.us:443/artifactory/api/npm/zoom-npm-virtual/tslib/-/tslib-2.6.1.tgz}
     dev: true
 
   /type-detect@4.0.8:
