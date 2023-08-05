@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "helpers": "workspace:^",
+    "swrv": "1.0.4",
     "vue-router": "^3.6.5"
   },
   "devDependencies": {
