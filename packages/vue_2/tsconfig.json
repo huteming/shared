@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    // 路径
+    "baseUrl": "./",
+
     "allowJs": true,
     "declaration": false
   },
