@@ -14,6 +14,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
+      // fix: [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available.
       vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
     },
