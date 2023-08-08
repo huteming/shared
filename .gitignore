@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 coverage
+coverage_jscpd
 dist-ssr
 *.local
 

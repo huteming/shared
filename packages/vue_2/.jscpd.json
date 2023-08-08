@@ -1,0 +1,8 @@
+{
+  "threshold": 5,
+  "reporters": ["html", "console", "badge"],
+  "output": "./coverage_jscpd",
+  "pattern": "src/**/*",
+  "absolute": true,
+  "gitignore": true
+}
