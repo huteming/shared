@@ -7,7 +7,7 @@
  * 很有可能是因为编辑器的插件完成了这个工作。比如 vscode 中的 "TypeScript Vue Plugin(Volar)"
  */
 
-declare module '*.vue' {
-  import Vue from 'vue'
-  export default Vue
-}
+// declare module '*.vue' {
+//   import Vue from 'vue'
+//   export default Vue
+// }

@@ -13,11 +13,13 @@ declare module 'vue/types/vue' {
   // console.log(vm.$myProperty) // 将会顺利编译通过
   interface Vue {
     $myProperty: string
+    [key: string]: any
   }
 
   // console.log(Vue.$myGlobal)
   interface VueConstructor {
     $myGlobal: string
+    [key: string]: any
   }
 }
 
@@ -27,5 +29,6 @@ declare module 'vue/types/vue' {
 declare module 'vue/types/options' {
   interface ComponentOptions<V extends Vue> {
     myOption?: string
+    [key: string]: any
   }
 }

@@ -4,13 +4,40 @@ import { mount } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 
 describe('useRequest', () => {
-  it('should support run with params', async () => {
+  it('support run immediately', async () => {
+    const wrapper: any = mount({
+      template: '<div>{{ data }}</div>',
+      setup() {
+        const { loading, data } = useRequest(
+          async () => {
+            return 'hello'
+          },
+          {
+            initialData: 'default',
+            manual: false,
+          },
+        )
+        return { loading, data }
+      },
+    })
+
+    expect(wrapper.html()).toContain('default')
+    expect(wrapper.vm.loading).toBe(true)
+
+    await flushPromises()
+
+    expect(wrapper.html()).toContain('hello')
+    expect(wrapper.vm.loading).toBe(false)
+  })
+
+  it('support run with params', async () => {
     const mockService = jest.fn().mockResolvedValue('async')
 
     const wrapper: any = mount({
       template: '<div>{{ data }}</div>',
       setup() {
         const { loading, data, run } = useRequest(mockService, {
+          manual: false,
           defaultParams: [1, '2', true],
         })
         return { loading, data, run }
@@ -28,7 +55,7 @@ describe('useRequest', () => {
     expect(mockService).lastCalledWith(2, '3', false)
   })
 
-  it('should support manual control call', async () => {
+  it('support manual control call', async () => {
     const mockService = jest.fn().mockResolvedValue('hello')
 
     const wrapper: any = mount({
@@ -52,7 +79,7 @@ describe('useRequest', () => {
     expect(wrapper.vm.loading).toBe(false)
   })
 
-  it('should callback "onSuccess" be invoked', async () => {
+  it('support callback "onSuccess"', async () => {
     const onSuccess = jest.fn()
 
     const wrapper = mount({
@@ -63,6 +90,7 @@ describe('useRequest', () => {
             return 'hello'
           },
           {
+            manual: false,
             onSuccess: (data) => {
               onSuccess(data)
             },
@@ -77,45 +105,16 @@ describe('useRequest', () => {
     expect(onSuccess).toBeCalledWith('hello')
   })
 
-  it('should run immediately', async () => {
-    const wrapper: any = mount({
-      template: '<div>{{ data }}</div>',
-      setup() {
-        const { loading, data } = useRequest(
-          async () => {
-            return 'hello'
-          },
-          {
-            initialData: 'default',
-          },
-        )
-        return { loading, data }
-      },
-    })
-
-    expect(wrapper.html()).toContain('default')
-    expect(wrapper.vm.loading).toBe(true)
-
-    await flushPromises()
-
-    expect(wrapper.html()).toContain('hello')
-    expect(wrapper.vm.loading).toBe(false)
-  })
-
-  it('should throw error', async () => {
+  it('support callback "onError"', async () => {
     const onError = jest.fn()
 
     const wrapper: any = mount({
       template: '<div>{{ data }}</div>',
       setup() {
-        const { loading, data } = useRequest(
-          async () => {
-            throw 'err'
-          },
-          {
-            onError,
-          },
-        )
+        const { loading, data } = useRequest(jest.fn().mockRejectedValue('err'), {
+          manual: false,
+          onError,
+        })
         return { loading, data }
       },
     })
@@ -129,7 +128,7 @@ describe('useRequest', () => {
     expect(onError).toBeCalledWith('err')
   })
 
-  it('should watch ready state to run', async () => {
+  it('support watch ready state to run', async () => {
     const wrapper: any = mount({
       template: '<div id="button" @click="onclick">{{ data }}</div>',
       setup() {
@@ -140,6 +139,7 @@ describe('useRequest', () => {
           },
           {
             ready,
+            manual: false,
             initialData: 'default',
           },
         )
@@ -147,8 +147,7 @@ describe('useRequest', () => {
       },
       methods: {
         onclick() {
-          // @ts-ignore
-          this.ready = true
+          ;(this as any).ready = true
         },
       },
     })
@@ -164,29 +163,29 @@ describe('useRequest', () => {
     expect(wrapper.vm.loading).toBe(false)
   })
 
-  it('should be cancellable', async () => {
-    const wrapper: any = mount({
-      template: '<div>{{ data }}</div>',
-      setup() {
-        const { loading, data, cancel } = useRequest(
-          async () => {
-            return 'hello'
-          },
-          {
-            initialData: 'default',
-          },
-        )
-        return { loading, data, cancel }
-      },
+  it('expect the process will be suspended, when the request is canceled', async () => {
+    const mockCallback = jest.fn()
+    const { run, cancel } = useRequest(jest.fn().mockResolvedValue(''), {
+      manual: true,
     })
 
-    expect(wrapper.html()).toContain('default')
-    expect(wrapper.vm.loading).toBe(true)
-
-    await wrapper.vm.cancel()
+    run().then(mockCallback)
+    cancel()
     await flushPromises()
 
-    expect(wrapper.html()).toContain('default')
-    expect(wrapper.vm.loading).toBe(false)
+    expect(mockCallback).toBeCalledTimes(0)
+  })
+
+  it('expects to throw an exception when the request fails', async () => {
+    const { run } = useRequest(jest.fn().mockRejectedValue(new Error('rejected')), {
+      manual: true,
+    })
+
+    try {
+      await run()
+      expect(true).toBe(false)
+    } catch (err: any) {
+      expect(err.message).toBe('rejected')
+    }
   })
 })

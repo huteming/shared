@@ -27,7 +27,7 @@ interface UseRequestReturn<Res, Params extends any[]> {
 }
 
 const defaultOptions: Options<undefined, any> = {
-  manual: false,
+  manual: true,
   ready: ref(true),
 
   initialData: undefined,
@@ -63,39 +63,40 @@ function useRequest<Res, Params extends any[]>(service: CombineService<Res, Para
     })
   }
 
-  const run = async (...args: Params): Promise<void> => {
+  const run = async (...args: Params): Promise<Res> => {
     count++
     loading.value = true
     const curCount = count
 
     const shouldAbandon = () => unmountedFlag || curCount !== count
+    const peddingPromise = new Promise<Res>(() => {})
 
-    return service(...args)
-      .then((res) => {
-        if (shouldAbandon()) {
-          return
-        }
-        data.value = res
-        error.value = undefined
+    try {
+      const res = await service(...args)
 
-        onSuccess(res as any)
-      })
-      .catch((err) => {
-        if (shouldAbandon()) {
-          return
-        }
-        error.value = err
+      if (shouldAbandon()) {
+        return peddingPromise
+      }
 
-        onError(err)
-      })
-      .finally(() => {
-        if (shouldAbandon()) {
-          return
-        }
-        loading.value = false
+      data.value = res
+      error.value = undefined
+      loading.value = false
+      onSuccess(res as any)
+      onFinally()
 
-        onFinally()
-      })
+      return res
+    } catch (err: any) {
+      if (shouldAbandon()) {
+        return peddingPromise
+      }
+
+      error.value = err
+      loading.value = false
+      onError(err)
+      onFinally()
+
+      throw err
+    }
   }
 
   const cancel = () => {
@@ -108,7 +109,7 @@ function useRequest<Res, Params extends any[]>(service: CombineService<Res, Para
       ready,
       () => {
         if (ready.value) {
-          run(...defaultParams)
+          run(...defaultParams).catch(() => {})
         }
       },
       {
