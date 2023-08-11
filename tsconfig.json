@@ -12,9 +12,8 @@
       "@/*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
-
-    // outout
+    "resolveJsonModule": true,
+    "declaration": false
   },
   "exclude": ["node_modules"]
 }

@@ -177,15 +177,20 @@ describe('useRequest', () => {
   })
 
   it('expects to throw an exception when the request fails', async () => {
-    const { run } = useRequest(jest.fn().mockRejectedValue(new Error('rejected')), {
+    const onError = jest.fn()
+    const error = new Error('rejected')
+    const { run } = useRequest(jest.fn().mockRejectedValue(error), {
       manual: true,
+      onError,
     })
 
     try {
       await run()
       expect(true).toBe(false)
     } catch (err: any) {
-      expect(err.message).toBe('rejected')
+      expect(err.message).toBe(error.message)
+      expect(onError).toBeCalledTimes(1)
+      expect(onError).toBeCalledWith(error)
     }
   })
 })

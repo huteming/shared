@@ -1,0 +1,22 @@
+{
+  "name": "request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "mfe build",
+    "test": "mfe test",
+    "release": "mfe release"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "0.x.x",
+    "@hutm/footing": "^0.1.0",
+    "msw": "^0.38.1"
+  },
+  "peerDependencies": {
+    "axios": "0.x.x"
+  }
+}
