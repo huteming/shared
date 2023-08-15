@@ -3,9 +3,13 @@
   "compilerOptions": {
     // 路径
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
 
     "allowJs": true,
     "declaration": false
   },
-  "include": ["src"]
+  "include": ["src", "tests"],
+  "exclude": ["tests/mocks", "tests/setupTests.js"]
 }
