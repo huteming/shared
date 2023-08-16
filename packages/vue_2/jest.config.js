@@ -11,6 +11,8 @@ module.exports = {
   testMatch: ['<rootDir>/tests/**/*.spec.[jt]s?(x)'],
 
   setupFiles: ['<rootDir>/tests/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/mocks/matchMedia.ts'],
+
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.vue$': '@vue/vue2-jest',
