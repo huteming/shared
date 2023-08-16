@@ -10,7 +10,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'ts', 'vue'],
   testMatch: ['<rootDir>/tests/**/*.spec.[jt]s?(x)'],
 
-  setupFiles: ['<rootDir>/tests/setupTests.js'],
+  setupFiles: ['<rootDir>/tests/mocks/vue.ts'],
   setupFilesAfterEnv: ['<rootDir>/tests/mocks/matchMedia.ts'],
 
   transform: {

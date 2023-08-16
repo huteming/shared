@@ -11,5 +11,5 @@
     "declaration": false
   },
   "include": ["src", "tests"],
-  "exclude": ["tests/mocks", "tests/setupTests.js"]
+  "exclude": ["tests/mocks"]
 }
